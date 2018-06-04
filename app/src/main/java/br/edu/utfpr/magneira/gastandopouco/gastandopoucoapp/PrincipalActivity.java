@@ -3,7 +3,7 @@ package br.edu.utfpr.magneira.gastandopouco.gastandopoucoapp;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
-public class PrinciapalActivity extends AppCompatActivity {
+public class PrincipalActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
