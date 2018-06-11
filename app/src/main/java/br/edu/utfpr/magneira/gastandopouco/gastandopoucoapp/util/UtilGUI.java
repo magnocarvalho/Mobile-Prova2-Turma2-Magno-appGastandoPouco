@@ -14,17 +14,17 @@ public class UtilGUI {
 
         AlertDialog.Builder builder = new AlertDialog.Builder(contexto);
 
-        builder.setTitle(R.string.aviso);
+//        builder.setTitle(R.string.aviso);
         builder.setIcon(android.R.drawable.ic_dialog_alert);
         builder.setMessage(idTexto);
 
-        builder.setNeutralButton(R.string.ok,
-                new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-
-                    }
-                });
+//        builder.setNeutralButton(R.string.ok,
+//                new DialogInterface.OnClickListener() {
+//                    @Override
+//                    public void onClick(DialogInterface dialog, int which) {
+//
+//                    }
+//                });
 
         AlertDialog alert = builder.create();
         alert.show();
@@ -36,13 +36,13 @@ public class UtilGUI {
 
         AlertDialog.Builder builder = new AlertDialog.Builder(contexto);
 
-        builder.setTitle(R.string.confirmacao);
+//        builder.setTitle(R.string.confirmacao);
         builder.setIcon(android.R.drawable.ic_dialog_alert);
 
         builder.setMessage(mensagem);
 
-        builder.setPositiveButton(R.string.sim, listener);
-        builder.setNegativeButton(R.string.nao, listener);
+//        builder.setPositiveButton(R.string.sim, listener);
+//        builder.setNegativeButton(R.string.nao, listener);
 
         AlertDialog alert = builder.create();
         alert.show();
