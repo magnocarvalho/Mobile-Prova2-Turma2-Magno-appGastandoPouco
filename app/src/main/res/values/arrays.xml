@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="tipos_iniciais">
+
+        <item>@string/comida</item>
+        <item>@string/bar</item>
+        <item>@string/outros</item>
+        <item>@string/divesao</item>
+    </string-array>
+
+    <string-array name="tipos_contatos_iniciais">
+        <item>@string/telefone</item>
+        <item>@string/email</item>
+    </string-array>
+</resources>

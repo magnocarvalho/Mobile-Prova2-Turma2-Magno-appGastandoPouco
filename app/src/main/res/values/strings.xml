@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Room 3</string>
+    <string name="app_name">spending little</string>
     <string name="novo">New</string>
     <string name="nome">Name</string>
     <string name="idade">Age</string>
@@ -45,12 +45,16 @@
     <string name="email">e-mail</string>
     <string name="contatos">Contacts</string>
     <string name="valor">Value</string>
-    <string name="tipo_contato">Contact Type</string>
+    <string name="tipo_contato">Outlay</string>
     <string name="data_cadastro">Register Date</string>
     <string name="data_nascimento">Birthdate</string>
+    <string name="comida">Food</string>
 
     <plurals name="idade">
         <item quantity="one">%d year.</item>
         <item quantity="other">%d years.</item>
     </plurals>
+    <string name="bar">pub</string>
+    <string name="divesao">funny</string>
+    <string name="outros">others</string>
 </resources>
