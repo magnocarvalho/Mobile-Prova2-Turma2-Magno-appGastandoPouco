@@ -9,12 +9,59 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".PrincipalActivity">
+        <activity android:name=".PessoasActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+        </activity>
+        <activity
+            android:name=".PessoaActivity"
+            android:parentActivityName=".PessoasActivity" >
+            <!-- Parent activity meta-data to support 4.0 and lower -->
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".PessoasActivity" />
+        </activity>
+        <activity
+            android:name=".TipoActivity"
+            android:parentActivityName=".TiposActivity" >
+            <!-- Parent activity meta-data to support 4.0 and lower -->
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".TiposActivity" />
+        </activity>
+        <activity
+            android:name=".TiposActivity"
+            android:parentActivityName=".PessoasActivity" >
+            <!-- Parent activity meta-data to support 4.0 and lower -->
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".PessoasActivity" />
+        </activity>
+        <activity
+            android:name=".TipoContatoActivity"
+            android:parentActivityName=".TiposContatoActivity" >
+            <!-- Parent activity meta-data to support 4.0 and lower -->
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".TiposContatoActivity" />
+        </activity>
+        <activity
+            android:name=".TiposContatoActivity"
+            android:parentActivityName=".PessoasActivity" >
+            <!-- Parent activity meta-data to support 4.0 and lower -->
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".PessoasActivity" />
+        </activity>
+        <activity android:name=".ContatoActivity"
+            android:parentActivityName=".PessoaActivity" >
+            <!-- Parent activity meta-data to support 4.0 and lower -->
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".PessoaActivity" />
         </activity>
     </application>
 
