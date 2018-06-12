@@ -8,6 +8,10 @@ import android.support.annotation.NonNull;
 
 import java.util.Date;
 
+@Entity(tableName = "pessoas",
+        foreignKeys = @ForeignKey(entity = Tipo.class,
+                                  parentColumns = "id",
+                                  childColumns  = "tipoId"))
 public class Pessoa {
 
     @PrimaryKey(autoGenerate = true)
@@ -23,6 +27,13 @@ public class Pessoa {
     private Date dataNascimento;
 
     private Date dataCadastro;
+
+    @ColumnInfo(index = true)
+    private int tipoId;
+
+    public Pessoa(String nome){
+        setNome(nome);
+    }
 
     public int getId() {
         return id;
@@ -41,20 +52,12 @@ public class Pessoa {
         this.nome = nome;
     }
 
-    public String getUsername() {
-        return username;
+    public int getTipoId() {
+        return tipoId;
     }
 
-    public void setUsername(String username) {
-        this.username = username;
-    }
-
-    public String getSenha() {
-        return senha;
-    }
-
-    public void setSenha(String senha) {
-        this.senha = senha;
+    public void setTipoId(int tipoId) {
+        this.tipoId = tipoId;
     }
 
     public Date getDataNascimento() {
@@ -73,5 +76,8 @@ public class Pessoa {
         this.dataCadastro = dataCadastro;
     }
 
-
+    @Override
+    public String toString(){
+        return getNome();
+    }
 }
