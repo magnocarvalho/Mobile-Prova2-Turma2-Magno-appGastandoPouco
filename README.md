@@ -1,5 +1,5 @@
-# Mobile-Prova2-Turma2-Magno-appGastandoPouco
-Segunda avaliação de programação mobile - Engenharia de software - UTFPR - CP - Programação para Dispositivos Móveis - ES71 (2018_01) Projeto de aplicação android de controle de gastos, Mobile-Prova2-Turma2-MagnoCarvalho
+#appGastandoPouco
+trabalho final de  programação mobile - Engenharia de software - UTFPR - CP - Programação para Dispositivos Móveis - ES71 (2018_01) Projeto de aplicação android de controle de gastos.
 
 
 -------------------------------------------------------------------------------------------------------------------------------------
@@ -7,9 +7,13 @@ Projeto Final - Turma 2
 
 Crie um aplicativo que atenda as seguintes funcionalidades:
 
-Especifique o tema que trata a aplicação. Este tema deverá ter sido lançado pelo aluno no questionário a parte sobre "Tema dos Projetos Finais", e o mesmo deve ser aprovado previamente pelo professor. Deve-se evitar temas repetidos dentro da turma.
+Especifique o tema que trata a aplicação. (aplicação android de controle de gastos)
+
+Este tema deverá ter sido lançado pelo aluno no questionário a parte sobre "Tema dos Projetos Finais", e o mesmo deve ser aprovado previamente pelo professor. Deve-se evitar temas repetidos dentro da turma.
+
 Cadastre dados lançados pelo usuário, que tenham relação com a regra de negócio proposta para a aplicação;
 Faça a persistência em SQLite das informações da regra de negócio (se preferir, pode usar um ORM). Implemente o básico de persistência: cadastrar, consultar, alterar e excluir;
+
 Forneça alguma possibilidade de configuração ou personalização do aplicativo, e persista estas informações usando SharedPreferences;
 Utilize pelo menos os componentes básicos de interface vistos, como TextView, EditText, Spinner, CheckBox, RadioButtons e ListView;
 Crie uma Activity principal, onde desta é possível acessar as demais funcionalidades;
