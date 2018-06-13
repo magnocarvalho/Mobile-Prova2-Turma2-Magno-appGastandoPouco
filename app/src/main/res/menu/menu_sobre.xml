@@ -4,7 +4,7 @@
     xmlns:android="http://schemas.android.com/apk/res/android">
     <item
         android:id="@+id/menuPrincipal"
-        android:title="@string/tipos"
+        android:title="@string/app_name"
         app:showAsAction="never" />
     <item
         android:id="@+id/menuItemTipos"

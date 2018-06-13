@@ -10,7 +10,6 @@ import java.util.List;
 
 
 import br.edu.utfpr.magneira.gastandopouco.gastandopoucoapp.model.Gasto;
-import br.edu.utfpr.magneira.gastandopouco.gastandopoucoapp.model.Pessoa;
 
 @Dao
 public interface GastosDao {

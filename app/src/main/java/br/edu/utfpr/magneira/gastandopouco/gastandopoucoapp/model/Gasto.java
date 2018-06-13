@@ -59,6 +59,8 @@ public class Gasto {
         return valor;
     }
 
+
+
     public int getPessoaId() {
         return pessoaId;
     }
