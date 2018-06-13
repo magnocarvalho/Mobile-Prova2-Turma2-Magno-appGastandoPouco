@@ -15,7 +15,6 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
-import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.Spinner;
@@ -38,7 +37,7 @@ import br.edu.utfpr.magneira.gastandopouco.gastandopoucoapp.util.UtilsDate;
 
 
 
-public class PessoaActivity extends AppCompatActivity implements DatePickerDialog.OnDateSetListener {
+public class PessoaActivity extends AppCompatActivity {
 
     private static final int REQUEST_NOVO_Gasto    = 1;
     private static final int REQUEST_ALTERAR_Gasto = 2;
@@ -58,8 +57,8 @@ public class PessoaActivity extends AppCompatActivity implements DatePickerDialo
     private List<Gasto>         listaGastosRemovidos;
     private ArrayAdapter<Gasto> listaAdapter;
 
-    private TextView textViewDataCadastro;
-    private EditText editTextDataCadastro;
+//    private TextView textViewDataCadastro;
+//    private EditText editTextDataCadastro;
 
     private int      modo;
     private Pessoa   pessoa;
@@ -100,8 +99,8 @@ public class PessoaActivity extends AppCompatActivity implements DatePickerDialo
 
         editTextNome           = findViewById(R.id.editTextNome);
 //        editTextDataNascimento = findViewById(R.id.editTextDataNascimento);
-        spinnerTipo            = findViewById(R.id.spinnerTipoContato);
-//        listViewGastos       = findViewById(R.id.listViewContatos);
+        spinnerTipo            = findViewById(R.id.spinnerTipo);
+         listViewGastos       = findViewById(R.id.listViewContatos);
 //        textViewDataCadastro = findViewById(R.id.textViewDataCadastro);
 //        editTextDataCadastro = findViewById(R.id.editTextDataCadastro);
 //
@@ -196,20 +195,20 @@ public class PessoaActivity extends AppCompatActivity implements DatePickerDialo
 
                             editTextNome.setText(pessoa.getNome());
 
-                            calendarDataNascimento.setTime(pessoa.getDataNascimento());
+//                            calendarDataNascimento.setTime(pessoa.getDataNascimento());
 
-                            String textoData = UtilsDate.formatDate(PessoaActivity.this,
-                                                                    pessoa.getDataNascimento());
+//                            String textoData = UtilsDate.formatDate(PessoaActivity.this,
+//                                                                    pessoa.getDataNascimento());
 
-                            editTextDataNascimento.setText(textoData);
+//                            editTextDataNascimento.setText(textoData);
 
                             int posicao = posicaoTipo(pessoa.getTipoId());
                             spinnerTipo.setSelection(posicao);
 
-                            textoData = UtilsDate.formatDate(PessoaActivity.this,
-                                                             pessoa.getDataCadastro());
+//                            textoData = UtilsDate.formatDate(PessoaActivity.this,
+//                                                             pessoa.getDataCadastro());
 
-                            editTextDataCadastro.setText(textoData);
+//                            editTextDataCadastro.setText(textoData);
 
                             criaAdapterListGastos();
 
@@ -230,8 +229,8 @@ public class PessoaActivity extends AppCompatActivity implements DatePickerDialo
 
             criaAdapterListGastos();
 
-            textViewDataCadastro.setVisibility(View.INVISIBLE);
-            editTextDataCadastro.setVisibility(View.INVISIBLE);
+//            textViewDataCadastro.setVisibility(View.INVISIBLE);
+//            editTextDataCadastro.setVisibility(View.INVISIBLE);
         }
     }
 
@@ -313,18 +312,18 @@ public class PessoaActivity extends AppCompatActivity implements DatePickerDialo
             return;
         }
 
-        String txtDataNascimento = UtilGUI.validaCampoTexto(this,
-                                                             editTextDataNascimento,
-                                                             R.string.data_nascimento_vazia);
-        if (txtDataNascimento == null){
-            return;
-        }
+//        String txtDataNascimento = UtilGUI.validaCampoTexto(this,
+//                                                             editTextDataNascimento,
+//                                                             R.string.data_nascimento_vazia);
+//        if (txtDataNascimento == null){
+//            return;
+//        }
 
-        int idade = UtilsDate.totalAnos(calendarDataNascimento);
+//        int idade = UtilsDate.totalAnos(calendarDataNascimento);
 
 
         pessoa.setNome(nome);
-        pessoa.setDataNascimento(calendarDataNascimento.getTime());
+//        pessoa.setDataNascimento(calendarDataNascimento.getTime());
 
         Tipo tipo = (Tipo) spinnerTipo.getSelectedItem();
         if (tipo != null){
@@ -338,7 +337,7 @@ public class PessoaActivity extends AppCompatActivity implements DatePickerDialo
 
                 if (modo == NOVO) {
 
-                    pessoa.setDataCadastro(new Date());
+//                    pessoa.setDataCadastro(new Date());
 
                     int novoId = (int) database.pessoaDao().insert(pessoa);
 
@@ -535,13 +534,13 @@ public class PessoaActivity extends AppCompatActivity implements DatePickerDialo
         }
     }
 
-    @Override
-    public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
-
-        calendarDataNascimento.set(year, month, dayOfMonth);
-
-        String textoData = UtilsDate.formatDate(this, calendarDataNascimento.getTime());
-
-        editTextDataNascimento.setText(textoData);
-    }
+//    @Override
+//    public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
+//
+////        calendarDataNascimento.set(year, month, dayOfMonth);
+//
+////        String textoData = UtilsDate.formatDate(this, calendarDataNascimento.getTime());
+//
+////        editTextDataNascimento.setText(textoData);
+//    }
 }

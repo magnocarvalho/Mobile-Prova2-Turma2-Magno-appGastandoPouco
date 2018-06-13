@@ -17,7 +17,6 @@ import java.util.List;
 
 import br.edu.utfpr.magneira.gastandopouco.gastandopoucoapp.model.Gasto;
 import br.edu.utfpr.magneira.gastandopouco.gastandopoucoapp.model.Tipo;
-import br.edu.utfpr.magneira.gastandopouco.gastandopoucoapp.model.TipoGasto;
 import br.edu.utfpr.magneira.gastandopouco.gastandopoucoapp.persistencia.GastosDatabase;
 import br.edu.utfpr.magneira.gastandopouco.gastandopoucoapp.util.UtilGUI;
 
@@ -35,9 +34,8 @@ public class GastoActivity extends AppCompatActivity {
 
     private EditText editTextValor;
 
-    private List<TipoGasto>         listaTiposGasto;
-    private ArrayAdapter<TipoGasto> spinnerAdapter;
     private Spinner                   spinnerTipoGasto;
+    private List<Tipo>  listaTipos;
 
     private int modo;
     private int idGasto;
@@ -54,6 +52,14 @@ public class GastoActivity extends AppCompatActivity {
         intent.putExtra(MODO, NOVO);
 
         incorporaUsados(intent, lista);
+
+        activity.startActivityForResult(intent, requestCode);
+    }
+    public static void novo(Activity activity, int requestCode){
+
+        Intent intent = new Intent(activity, GastoActivity.class);
+        intent.putExtra(MODO, NOVO);
+
 
         activity.startActivityForResult(intent, requestCode);
     }
@@ -74,6 +80,21 @@ public class GastoActivity extends AppCompatActivity {
         incorporaUsados(intent, cloneList);
 
         activity.startActivityForResult(intent, requestCode);
+    }
+
+    public static void alterar(Activity activity, int requestCode, Gasto contato)
+    {
+
+        Intent intent = new Intent(activity, GastoActivity.class);
+
+        intent.putExtra(MODO, ALTERAR);
+        intent.putExtra(ID_CONTATO,      contato.getId());
+        intent.putExtra(VALOR,           contato.getValor());
+        intent.putExtra(ID_TIPO_CONTATO, contato.getTipoContatoId());
+
+
+        activity.startActivityForResult(intent, requestCode);
+
     }
 
     private static Intent incorporaUsados(Intent intent, List<Gasto> lista){
@@ -135,14 +156,14 @@ public class GastoActivity extends AppCompatActivity {
             idGasto = -1;
         }
 
-        carregaTiposGasto();
+        carregaTipos();
     }
 
     private int posicaoTipoGastoId(int TipoGastoId){
 
-        for (int pos = 0; pos < listaTiposGasto.size(); pos++){
+        for (int pos = 0; pos < listaTipos.size(); pos++){
 
-            Tipo t = listaTiposGasto.get(pos);
+            Tipo t = listaTipos.get(pos);
 
             if (t.getId() == TipoGastoId){
                 return pos;
@@ -152,31 +173,54 @@ public class GastoActivity extends AppCompatActivity {
         return -1;
     }
 
-    private void carregaTiposGasto(){
+//    private void carregaTiposGasto(){
+//
+//        AsyncTask.execute(new Runnable() {
+//            @Override
+//            public void run() {
+//
+//                GastosDatabase database = GastosDatabase.getDatabase(GastoActivity.this);
+//
+//                listaTiposGasto = database.tipoDao().queryAll();
+//
+//
+//                GastoActivity.this.runOnUiThread(new Runnable() {
+//                    @Override
+//                    public void run() {
+//                        spinnerAdapter = new ArrayAdapter<>(GastoActivity.this,
+//                                android.R.layout.simple_list_item_1,
+//                                listaTiposGasto);
+//
+//                        spinnerTipoGasto.setAdapter(spinnerAdapter);
+//                        spinnerTipoGasto.setSelection(posicaoTipoGastoId(idTipoGasto));
+//                    }
+//                });
+//            }
+//        });
+//    }
+    private void carregaTipos(){
 
         AsyncTask.execute(new Runnable() {
             @Override
             public void run() {
-
                 GastosDatabase database = GastosDatabase.getDatabase(GastoActivity.this);
 
-                listaTiposGasto = database.tipoGastoDao().queryAll();
-
+                listaTipos = database.tipoDao().queryAll();
 
                 GastoActivity.this.runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
-                        spinnerAdapter = new ArrayAdapter<>(GastoActivity.this,
+                        ArrayAdapter<Tipo> spinnerAdapter = new ArrayAdapter<>(GastoActivity.this,
                                 android.R.layout.simple_list_item_1,
-                                listaTiposGasto);
+                                listaTipos);
 
                         spinnerTipoGasto.setAdapter(spinnerAdapter);
-                        spinnerTipoGasto.setSelection(posicaoTipoGastoId(idTipoGasto));
                     }
                 });
             }
         });
     }
+
 
     private void salvar(){
         String valor  = UtilGUI.validaCampoTexto(this,
@@ -186,8 +230,8 @@ public class GastoActivity extends AppCompatActivity {
             return;
         }
 
-        TipoGasto TipoGasto = (TipoGasto) spinnerTipoGasto.getSelectedItem();
-        if (TipoGasto == null){
+        Tipo tipoGasto = (Tipo) spinnerTipoGasto.getSelectedItem();
+        if (tipoGasto == null){
             UtilGUI.avisoErro(this, R.string.tipo_contato_vazio);
             return;
         }
@@ -196,7 +240,7 @@ public class GastoActivity extends AppCompatActivity {
 
             for (int cont = 0; cont < tiposUsados.length; cont++){
 
-                if (TipoGasto.getId() == tiposUsados[cont] &&
+                if (tipoGasto.getId() == tiposUsados[cont] &&
                     valor.equalsIgnoreCase(valoresUsados[cont])){
                     UtilGUI.avisoErro(this, R.string.contato_valor_repetido);
                     return;
@@ -209,7 +253,7 @@ public class GastoActivity extends AppCompatActivity {
         intent.putExtra(MODO,  modo);
         intent.putExtra(ID_CONTATO, idGasto);
         intent.putExtra(VALOR, valor);
-        intent.putExtra(ID_TIPO_CONTATO, TipoGasto.getId());
+        intent.putExtra(ID_TIPO_CONTATO, tipoGasto.getId());
 
         setResult(Activity.RESULT_OK, intent);
         finish();

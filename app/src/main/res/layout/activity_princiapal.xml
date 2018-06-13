@@ -6,4 +6,15 @@
     android:layout_height="match_parent"
     tools:context=".PrincipalActivity">
 
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="horizontal">
+
+        <ListView
+            android:id="@+id/listViewIt"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+    </LinearLayout>
+
 </android.support.constraint.ConstraintLayout>

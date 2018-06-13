@@ -9,7 +9,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".PessoasActivity">
+        <activity android:name=".PrincipalActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -17,8 +17,16 @@
             </intent-filter>
         </activity>
         <activity
+            android:name=".PessoasActivity"
+            android:parentActivityName=".PrincipalActivity">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".PessoasActivity" />
+        </activity>
+        <activity
             android:name=".PessoaActivity"
-            android:parentActivityName=".PessoasActivity" >
+            android:parentActivityName=".PessoasActivity">
+
             <!-- Parent activity meta-data to support 4.0 and lower -->
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
@@ -26,7 +34,8 @@
         </activity>
         <activity
             android:name=".TipoActivity"
-            android:parentActivityName=".TiposActivity" >
+            android:parentActivityName=".TiposActivity">
+
             <!-- Parent activity meta-data to support 4.0 and lower -->
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
@@ -34,7 +43,8 @@
         </activity>
         <activity
             android:name=".TiposActivity"
-            android:parentActivityName=".PessoasActivity" >
+            android:parentActivityName=".PessoasActivity">
+
             <!-- Parent activity meta-data to support 4.0 and lower -->
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
@@ -42,7 +52,8 @@
         </activity>
         <activity
             android:name=".TipoContatoActivity"
-            android:parentActivityName=".TiposContatoActivity" >
+            android:parentActivityName=".TiposContatoActivity">
+
             <!-- Parent activity meta-data to support 4.0 and lower -->
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
@@ -50,19 +61,23 @@
         </activity>
         <activity
             android:name=".TiposContatoActivity"
-            android:parentActivityName=".PessoasActivity" >
+            android:parentActivityName=".PessoasActivity">
+
             <!-- Parent activity meta-data to support 4.0 and lower -->
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".PessoasActivity" />
         </activity>
-        <activity android:name=".ContatoActivity"
-            android:parentActivityName=".PessoaActivity" >
+        <activity
+            android:name=".GastoActivity"
+            android:parentActivityName=".PessoaActivity">
+
             <!-- Parent activity meta-data to support 4.0 and lower -->
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".PessoaActivity" />
         </activity>
+        <activity android:name=".Sobre"></activity>
     </application>
 
 </manifest>

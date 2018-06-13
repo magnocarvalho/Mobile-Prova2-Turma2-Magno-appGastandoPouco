@@ -189,8 +189,8 @@ public class PessoasActivity extends AppCompatActivity {
                 TiposActivity.abrir(this);
                 return true;
 
-            case R.id.menuItemTiposContatos:
-                TiposContatoActivity.abrir(this);
+            case R.id.menuItemSobre:
+                Sobre.abrir(this);
                 return true;
 
             default:

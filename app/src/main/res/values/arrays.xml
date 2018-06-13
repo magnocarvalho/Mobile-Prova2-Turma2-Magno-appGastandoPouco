@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string-array name="tipos_iniciais">
-
         <item>@string/comida</item>
         <item>@string/bar</item>
         <item>@string/outros</item>
