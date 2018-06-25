@@ -27,6 +27,7 @@ public class Sobre extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sobre);
         text = findViewById(R.id.textAluno);
+        lerPreferenciaCor();
     }
     private void mudaCorFundo(){
         text.setTextColor(opcao);
