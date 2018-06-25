@@ -32,6 +32,9 @@ public class Tipo {
     public Tipo(String descricao){
         setDescricao(descricao);
     }
+    public Tipo(){
+
+    }
 
     public int getId() {
         return id;

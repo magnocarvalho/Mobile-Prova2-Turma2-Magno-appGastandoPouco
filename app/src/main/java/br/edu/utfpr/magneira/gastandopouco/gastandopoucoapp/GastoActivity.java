@@ -43,6 +43,7 @@ public class GastoActivity extends AppCompatActivity {
 
     private int[]    tiposUsados;
     private String[] valoresUsados;
+    private Gasto gastoObj;
 
 
     public static void novo(Activity activity, int requestCode, List<Gasto> lista){
@@ -71,7 +72,7 @@ public class GastoActivity extends AppCompatActivity {
         intent.putExtra(MODO, ALTERAR);
         intent.putExtra(ID_CONTATO,      contato.getId());
         intent.putExtra(VALOR,           contato.getValor());
-        intent.putExtra(ID_TIPO_CONTATO, contato.getTipoContatoId());
+        intent.putExtra(ID_TIPO_CONTATO, contato.getTipoId());
 
         ArrayList<Gasto> cloneList = new ArrayList<>(lista);
 
@@ -90,11 +91,22 @@ public class GastoActivity extends AppCompatActivity {
         intent.putExtra(MODO, ALTERAR);
         intent.putExtra(ID_CONTATO,      contato.getId());
         intent.putExtra(VALOR,           contato.getValor());
-        intent.putExtra(ID_TIPO_CONTATO, contato.getTipoContatoId());
+        intent.putExtra(ID_TIPO_CONTATO, contato.getTipoId());
 
 
         activity.startActivityForResult(intent, requestCode);
 
+    }
+    public static void alterar(Activity activity, int requestCode,  int gastoID, String gastoValor, int GastoTipoId){
+
+        Intent intent = new Intent(activity, GastoActivity.class);
+
+        intent.putExtra(MODO, ALTERAR);
+        intent.putExtra(ID_CONTATO,     gastoID);
+        intent.putExtra(VALOR,           gastoValor);
+        intent.putExtra(ID_TIPO_CONTATO, GastoTipoId);
+
+        activity.startActivityForResult(intent, requestCode);
     }
 
     private static Intent incorporaUsados(Intent intent, List<Gasto> lista){
@@ -108,7 +120,7 @@ public class GastoActivity extends AppCompatActivity {
 
                 Gasto c = lista.get(cont);
 
-                tiposUsados[cont]   = c.getTipoContatoId();
+                tiposUsados[cont]   = c.getTipoId();
                 valoresUsados[cont] = Double.toString(c.getValor());
             }
 
@@ -131,6 +143,7 @@ public class GastoActivity extends AppCompatActivity {
 
         editTextValor      = findViewById(R.id.editTextValor);
         spinnerTipoGasto = findViewById(R.id.spinnerTipoContato);
+        carregaTipos();
 
         Intent intent = getIntent();
         final Bundle bundle = intent.getExtras();
@@ -147,16 +160,16 @@ public class GastoActivity extends AppCompatActivity {
             idGasto     = bundle.getInt(ID_CONTATO);
             idTipoGasto = bundle.getInt(ID_TIPO_CONTATO);
 
-            editTextValor.setText(bundle.getString(VALOR));
+            editTextValor.setText(String.valueOf(bundle.getDouble(VALOR)));
 
         }else{
 
-            setTitle(R.string.novo_contato);
+            setTitle(R.string.novo_gasto);
 
             idGasto = -1;
         }
+        gastoObj = new Gasto();
 
-        carregaTipos();
     }
 
     private int posicaoTipoGastoId(int TipoGastoId){
@@ -222,24 +235,17 @@ public class GastoActivity extends AppCompatActivity {
     }
 
 
-    private void salvar(){
-        String valor  = UtilGUI.validaCampoTexto(this,
-                                                  editTextValor,
-                                                  R.string.descricao_vazia);
-        if (valor == null){
-            return;
-        }
 
-        Tipo tipoGasto = (Tipo) spinnerTipoGasto.getSelectedItem();
+    private void salvar(){
+
+        final String valor  = editTextValor.getEditableText().toString();
+        final Tipo tipoGasto = (Tipo) spinnerTipoGasto.getSelectedItem();
         if (tipoGasto == null){
             UtilGUI.avisoErro(this, R.string.tipo_contato_vazio);
             return;
         }
-
         if (tiposUsados != null){
-
             for (int cont = 0; cont < tiposUsados.length; cont++){
-
                 if (tipoGasto.getId() == tiposUsados[cont] &&
                     valor.equalsIgnoreCase(valoresUsados[cont])){
                     UtilGUI.avisoErro(this, R.string.contato_valor_repetido);
@@ -247,15 +253,32 @@ public class GastoActivity extends AppCompatActivity {
                 }
             }
         }
-
-        Intent intent = new Intent();
-
+        final Intent intent = new Intent();
         intent.putExtra(MODO,  modo);
         intent.putExtra(ID_CONTATO, idGasto);
         intent.putExtra(VALOR, valor);
         intent.putExtra(ID_TIPO_CONTATO, tipoGasto.getId());
 
-        setResult(Activity.RESULT_OK, intent);
+        gastoObj.setTipoId(tipoGasto.getId());
+        gastoObj.setValor(Double.parseDouble(valor));
+        gastoObj.setTipoGastoS(tipoGasto.getDescricao());
+        AsyncTask.execute(new Runnable() {
+            @Override
+            public void run() {
+                GastosDatabase database = GastosDatabase.getDatabase(GastoActivity.this);
+                if (modo == NOVO) {
+
+                    database.gastosDao().insert(gastoObj);
+                }
+                if (modo == ALTERAR)
+                {
+                    gastoObj.setId(idGasto);
+
+                    database.gastosDao().update(gastoObj);
+                }
+                setResult(Activity.RESULT_OK);
+            }
+        });
         finish();
     }
 

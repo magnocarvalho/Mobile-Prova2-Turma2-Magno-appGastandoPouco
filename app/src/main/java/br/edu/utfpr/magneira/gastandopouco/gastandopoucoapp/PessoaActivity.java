@@ -173,21 +173,21 @@ public class PessoaActivity extends AppCompatActivity {
 
                     pessoa = database.pessoaDao().queryForId(id);
 
-                    listaGastos = database.gastosDao().queryForPessoaId(pessoa.getId());
+//                    listaGastos = database.gastosDao().queryForPessoaId(pessoa.getId());
+//
+//                    for (Gasto c : listaGastos){
+//
+//                        TipoGasto tipoGasto = getTipoGasto(c.getTipoContatoId());
+//
+//                        if (tipoGasto == null){
+//                            tipoGasto = database.tipoGastoDao().queryForId(c.getTipoContatoId());
+//                            listaTiposGasto.add(tipoGasto);
+//                        }
+//
+//                        c.setTipoGasto(tipoGasto);
+//                    }
 
-                    for (Gasto c : listaGastos){
-
-                        TipoGasto tipoGasto = getTipoGasto(c.getTipoContatoId());
-
-                        if (tipoGasto == null){
-                            tipoGasto = database.tipoGastoDao().queryForId(c.getTipoContatoId());
-                            listaTiposGasto.add(tipoGasto);
-                        }
-
-                        c.setTipoGasto(tipoGasto);
-                    }
-
-                    Collections.sort(listaGastos, Gasto.comparador);
+//                    Collections.sort(listaGastos, Gasto.comparador);
 
                     PessoaActivity.this.runOnUiThread(new Runnable() {
                         @Override
@@ -355,18 +355,18 @@ public class PessoaActivity extends AppCompatActivity {
                     }
                 }
 
-                for (Gasto c : listaGastos){
-
-                    if (c.getPessoaId() != pessoa.getId()){
-                        c.setPessoaId(pessoa.getId());
-                    }
-
-                    if (c.getId() == 0){
-                        database.gastosDao().insert(c);
-                    }else{
-                        database.gastosDao().update(c);
-                    }
-                }
+//                for (Gasto c : listaGastos){
+//
+//                    if (c.getPessoaId() != pessoa.getId()){
+//                        c.setPessoaId(pessoa.getId());
+//                    }
+//
+//                    if (c.getId() == 0){
+//                        database.gastosDao().insert(c);
+//                    }else{
+//                        database.gastosDao().update(c);
+//                    }
+//                }
 
                 setResult(Activity.RESULT_OK);
                 finish();
@@ -440,7 +440,7 @@ public class PessoaActivity extends AppCompatActivity {
             }
 
             Gasto.setValor(Double.parseDouble(valor));
-            Gasto.setTipoContatoId(idTipoGasto);
+//            Gasto.setTipoContatoId(idTipoGasto);
 
 
             AsyncTask.execute(new Runnable() {
@@ -451,17 +451,17 @@ public class PessoaActivity extends AppCompatActivity {
 
                     for (Gasto c : listaGastos){
 
-                        TipoGasto tipoGasto = getTipoGasto(c.getTipoContatoId());
+//                        TipoGasto tipoGasto = getTipoGasto(c.getTipoContatoId());
 
-                        if (tipoGasto == null){
-                            tipoGasto = database.tipoGastoDao().queryForId(c.getTipoContatoId());
-                            listaTiposGasto.add(tipoGasto);
-                        }
-
-                        c.setTipoGasto(tipoGasto);
+//                        if (tipoGasto == null){
+//                            tipoGasto = database.tipoGastoDao().queryForId(c.getTipoContatoId());
+//                            listaTiposGasto.add(tipoGasto);
+//                        }
+//
+//                        c.setTipoGasto(tipoGasto);
                     }
 
-                    Collections.sort(listaGastos, Gasto.comparador);
+//                    Collections.sort(listaGastos, Gasto.comparador);
 
                     PessoaActivity.this.runOnUiThread(new Runnable() {
                         @Override

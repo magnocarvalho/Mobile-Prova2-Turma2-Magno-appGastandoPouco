@@ -101,7 +101,7 @@ public class TiposContatoActivity extends AppCompatActivity {
             public void run() {
                 GastosDatabase database = GastosDatabase.getDatabase(TiposContatoActivity.this);
 
-                List<Gasto> lista = database.gastosDao().queryForTipoContatoId(tipoContato.getId());
+                List<Gasto> lista = null;
 
                 if (lista != null && lista.size() > 0){
 

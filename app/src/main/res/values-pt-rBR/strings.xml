@@ -29,8 +29,8 @@
     <string name="novo_tipo_contato">Novo Tipo Contato</string>
     <string name="alterar_tipo_contato">Alterar Tipo Contato</string>
     <string name="tipos_contato">Tipos de Gastos</string>
-    <string name="novo_contato">Novo Contato</string>
-    <string name="alterar_contato">Alterar Contato</string>
+    <string name="novo_gasto">Novo Gasto</string>
+    <string name="alterar_contato">Alterar Gasto</string>
     <string name="valor_vazio">O valor está vazio!</string>
     <string name="tipo_contato_vazio">O Tipo do Contato está vazio!</string>
     <string name="nenhum_tipo">Não existe nenhum tipo criado!</string>
@@ -58,8 +58,9 @@
     <string name="divesao">diversão</string>
     <string name="app_name">Gastando Pouco</string>
     <string name="outros">outros</string>
-    <string name="sobre">About</string>
+    <string name="sobre">Sobre</string>
     <string name="name">controle de gastos</string>
     <string name="magno">Magno Carvalho dos santos</string>
     <string name="software">Engenharia de Software</string>
+    <string name="tiposs">tipos de gastos</string>
 </resources>

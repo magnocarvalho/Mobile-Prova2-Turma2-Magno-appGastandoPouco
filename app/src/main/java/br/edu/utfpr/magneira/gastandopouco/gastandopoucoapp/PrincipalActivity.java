@@ -12,12 +12,14 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.ListAdapter;
 import android.widget.ListView;
 
 import java.util.List;
 
 import br.edu.utfpr.magneira.gastandopouco.gastandopoucoapp.model.Gasto;
 
+import br.edu.utfpr.magneira.gastandopouco.gastandopoucoapp.model.Tipo;
 import br.edu.utfpr.magneira.gastandopouco.gastandopoucoapp.persistencia.GastosDatabase;
 import br.edu.utfpr.magneira.gastandopouco.gastandopoucoapp.util.UtilGUI;
 
@@ -29,12 +31,15 @@ public class PrincipalActivity extends AppCompatActivity {
     private ListView listViewPessoa;
     private ArrayAdapter<Gasto> listaAdapter;
     private List<Gasto> lista;
-
+    private List<Tipo> tipoGasto;
+    private Gasto gTemp;
+    private Tipo tmp;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_princiapal);
-
+        gTemp = new Gasto();
+        tmp = new Tipo();
         listViewPessoa = findViewById(R.id.listViewIt);
 
         listViewPessoa.setOnItemClickListener(new AdapterView.OnItemClickListener()
@@ -58,7 +63,7 @@ public class PrincipalActivity extends AppCompatActivity {
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
 
         if ((requestCode == REQUEST_NOVA_PESSOA || requestCode == REQUEST_ALTERAR_PESSOA)
-                && resultCode == Activity.RESULT_OK){
+                || resultCode == Activity.RESULT_OK){
 
             carregaGastos();
         }
@@ -69,9 +74,7 @@ public class PrincipalActivity extends AppCompatActivity {
             @Override
             public void run() {
                 GastosDatabase database = GastosDatabase.getDatabase(PrincipalActivity.this);
-
                 lista = database.gastosDao().queryAll();
-
                 PrincipalActivity.this.runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
@@ -85,6 +88,7 @@ public class PrincipalActivity extends AppCompatActivity {
             }
         });
     }
+
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.lista_pessoas, menu);
@@ -176,19 +180,7 @@ public class PrincipalActivity extends AppCompatActivity {
                 }
 
 
-                total = database.tipoGastoDao().total();
 
-                if (total == 0){
-
-                    PrincipalActivity.this.runOnUiThread(new Runnable() {
-                        @Override
-                        public void run() {
-                            UtilGUI.avisoErro(PrincipalActivity.this, R.string.nenhum_tipo_contato);
-                        }
-                    });
-
-                    return;
-                }
 
                 GastoActivity.novo(PrincipalActivity.this, REQUEST_NOVA_PESSOA);
 
@@ -209,17 +201,15 @@ public class PrincipalActivity extends AppCompatActivity {
     public boolean onContextItemSelected(MenuItem item) {
 
         AdapterView.AdapterContextMenuInfo info;
-
         info = (AdapterView.AdapterContextMenuInfo) item.getMenuInfo();
-
         Gasto pessoa = (Gasto) listViewPessoa.getItemAtPosition(info.position);
-
+        String temp = String.valueOf(pessoa.getValor());
         switch(item.getItemId()){
 
             case R.id.menuItemAbrir:
                 GastoActivity.alterar(this,
                         REQUEST_ALTERAR_PESSOA,
-                        pessoa);
+                        pessoa.getId(), temp , pessoa.getTipoId());
                 return true;
 
             case R.id.menuItemApagar:
@@ -237,4 +227,6 @@ public class PrincipalActivity extends AppCompatActivity {
 
         activity.startActivity(intent);
     }
+
+
 }

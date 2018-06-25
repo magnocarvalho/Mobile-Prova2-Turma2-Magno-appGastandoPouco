@@ -26,12 +26,6 @@ public interface GastosDao {
     @Query("SELECT * FROM gastos WHERE id = :id")
     Gasto queryForId(long id);
 
-    @Query("SELECT * FROM gastos WHERE pessoaId = :pessoaId")
-    List<Gasto> queryForPessoaId(long pessoaId);
-
-    @Query("SELECT * FROM gastos WHERE tipoGastoId = :id ORDER BY valor ASC")
-    List<Gasto> queryForTipoContatoId(long id);
-
     @Query("SELECT * FROM gastos ORDER BY id ASC")
     List<Gasto> queryAll();
 }

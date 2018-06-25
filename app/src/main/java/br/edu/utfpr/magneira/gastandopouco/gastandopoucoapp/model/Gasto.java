@@ -12,13 +12,10 @@ import java.util.Comparator;
 import static android.arch.persistence.room.ForeignKey.CASCADE;
 
 @Entity(tableName = "gastos",
-        foreignKeys = {@ForeignKey(entity = TipoGasto.class,
-                                   parentColumns = "id",
-                                   childColumns = "tipoGastoId"),
-                       @ForeignKey(entity = Pessoa.class,
-                                   parentColumns = "id",
-                                   childColumns = "pessoaId",
-                                   onDelete = CASCADE)})
+        foreignKeys = @ForeignKey(entity = Tipo.class,
+                parentColumns = "id",
+                childColumns  = "tipoId"))
+
 public class Gasto {
 
     @PrimaryKey(autoGenerate = true)
@@ -27,25 +24,18 @@ public class Gasto {
     private double valor;
 
     @ColumnInfo(index = true)
-    private int pessoaId;
+    private int tipoId;
+    private String tipoGastoS;
 
-    public int getTipoGastoId() {
-        return tipoGastoId;
+    public String getTipoGastoS() {
+        return tipoGastoS;
     }
 
-    @ColumnInfo(index = true)
-    private int tipoGastoId;
-
-    public void setValor( double valor) {
-        this.valor = valor;
+    public void setTipoGastoS(String tipoGastoS) {
+        this.tipoGastoS = tipoGastoS;
     }
 
-    public void setTipoGastoId(int tipoGastoId) {
-        this.tipoGastoId = tipoGastoId;
-    }
 
-    @Ignore
-    private TipoGasto tipoGasto;
 
     public int getId() {
         return id;
@@ -59,50 +49,22 @@ public class Gasto {
         return valor;
     }
 
-
-
-    public int getPessoaId() {
-        return pessoaId;
+    public void setValor(double valor) {
+        this.valor = valor;
     }
 
-    public void setPessoaId(int pessoaId) {
-        this.pessoaId = pessoaId;
+    public int getTipoId() {
+        return tipoId;
     }
 
-    public int getTipoContatoId() {
-        return tipoGastoId;
+    public void setTipoId(int tipoId) {
+        this.tipoId = tipoId;
     }
 
-    public void setTipoContatoId(int tipoContatoId) {
-        this.tipoGastoId = tipoContatoId;
+    @Override
+    public String toString() {
+        return ""+ getValor() + "  :  " + getTipoGastoS();
     }
 
-    public TipoGasto getTipoGasto(){
-        return tipoGasto;
-    }
-
-    public void setTipoGasto(TipoGasto tipoGasto){
-        this.tipoGasto = tipoGasto;
-    }
-
-    public static Comparator<Gasto> comparador = new Comparator<Gasto>() {
-        @Override
-        public int compare(Gasto c1, Gasto c2) {
-
-            if (c1.tipoGasto != null && c2.tipoGasto != null){
-
-                int ordemTipo = c1.getTipoGasto().getDescricao().compareToIgnoreCase(c2.getTipoGasto().getDescricao());
-
-                if (ordemTipo == 0){
-                   return String.valueOf(c1.getValor()).compareToIgnoreCase( String.valueOf(c2.getValor()));
-
-                }else{
-                    return ordemTipo;
-                }
-            }else{
-                return  String.valueOf(c1.getValor()).compareToIgnoreCase( String.valueOf(c2.getValor()));
-            }
-        }
-    };
 
 }

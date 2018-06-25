@@ -39,19 +39,15 @@ public class TipoContatoActivity extends AppCompatActivity {
     public static void novo(Activity activity, int requestCode) {
 
         Intent intent = new Intent(activity, TipoContatoActivity.class);
-
         intent.putExtra(MODO, NOVO);
-
         activity.startActivityForResult(intent, requestCode);
     }
 
     public static void alterar(Activity activity, int requestCode, TipoGasto tipoContato){
 
         Intent intent = new Intent(activity, TipoContatoActivity.class);
-
         intent.putExtra(MODO, ALTERAR);
         intent.putExtra(ID, tipoContato.getId());
-
         activity.startActivityForResult(intent, requestCode);
     }
 
@@ -64,13 +60,8 @@ public class TipoContatoActivity extends AppCompatActivity {
         if (actionBar != null){
             actionBar.setDisplayHomeAsUpEnabled(true);
         }
-
         editTexDescricao     = findViewById(R.id.editTextDescricao);
-        textViewDataCadastro = findViewById(R.id.textViewDataCadastro);
-        editTextDataCadastro = findViewById(R.id.editTextDataCadastro);
-
         editTextDataCadastro.setEnabled(false);
-
         Intent intent = getIntent();
         final Bundle bundle = intent.getExtras();
 

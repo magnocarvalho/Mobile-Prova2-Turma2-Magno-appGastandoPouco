@@ -18,7 +18,7 @@ import br.edu.utfpr.magneira.gastandopouco.gastandopoucoapp.model.Pessoa;
 import br.edu.utfpr.magneira.gastandopouco.gastandopoucoapp.model.TipoGasto;
 
 
-@Database(entities = {Tipo.class, TipoGasto.class, Pessoa.class, Gasto.class}, version = 1)
+@Database(entities = {Tipo.class, TipoGasto.class, Pessoa.class, Gasto.class}, version = 3)
 @TypeConverters({br.edu.utfpr.magneira.gastandopouco.gastandopoucoapp.persistencia.Converters.class})
 public abstract class GastosDatabase extends RoomDatabase {
 
@@ -40,7 +40,7 @@ public abstract class GastosDatabase extends RoomDatabase {
                 if (instance == null) {
                    Builder builder =  Room.databaseBuilder(context,
                                                            br.edu.utfpr.magneira.gastandopouco.gastandopoucoapp.persistencia.GastosDatabase.class,
-                                                           "gastos.db");
+                                                           "gastos.db").fallbackToDestructiveMigration();
 
                    builder.addCallback(new Callback() {
                         @Override
@@ -50,7 +50,7 @@ public abstract class GastosDatabase extends RoomDatabase {
                                 @Override
                                 public void run() {
                                     carregaTiposIniciais(context);
-                                    carregaTiposContatosIniciais(context);
+
                                 }
                             });
                         }

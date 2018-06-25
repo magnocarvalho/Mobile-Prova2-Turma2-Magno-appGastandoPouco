@@ -29,8 +29,7 @@ public class TipoActivity extends AppCompatActivity {
     public static final int    ALTERAR = 2;
 
     private EditText editTexDescricao;
-    private TextView textViewDataCadastro;
-    private EditText editTextDataCadastro;
+
 
     private int  modo;
     private Tipo tipo;
@@ -65,10 +64,9 @@ public class TipoActivity extends AppCompatActivity {
         }
 
         editTexDescricao    = findViewById(R.id.editTextDescricao);
-        textViewDataCadastro = findViewById(R.id.textViewDataCadastro);
-        editTextDataCadastro = findViewById(R.id.editTextDataCadastro);
 
-        editTextDataCadastro.setEnabled(false);
+
+//        editTextDataCadastro.setEnabled(false);
 
         Intent intent = getIntent();
         final Bundle bundle = intent.getExtras();
@@ -97,7 +95,7 @@ public class TipoActivity extends AppCompatActivity {
                             String textoData = UtilsDate.formatDate(TipoActivity.this,
                                                                     tipo.getDataCadastro());
 
-                            editTextDataCadastro.setText(textoData);
+//                            editTextDataCadastro.setText(textoData);
                         }
                     });
                 }
@@ -109,8 +107,8 @@ public class TipoActivity extends AppCompatActivity {
 
             tipo = new Tipo("");
 
-            textViewDataCadastro.setVisibility(View.INVISIBLE);
-            editTextDataCadastro.setVisibility(View.INVISIBLE);
+//            textViewDataCadastro.setVisibility(View.INVISIBLE);
+//            editTextDataCadastro.setVisibility(View.INVISIBLE);
         }
     }
 
