@@ -63,4 +63,7 @@
     <string name="magno">Magno Carvalho dos santos</string>
     <string name="software">Engenharia de Software</string>
     <string name="tiposs">tipos de gastos</string>
+    <string name="azul">azul</string>
+    <string name="vermelho">vermelho</string>
+    <string name="amarelo">amarelo</string>
 </resources>

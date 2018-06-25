@@ -14,5 +14,18 @@
         android:id="@+id/menuItemSobre"
         android:title="@string/sobre"
         app:showAsAction="never" />
+    <group
+        android:id="@+id/groupCores"
+        android:checkableBehavior="single" >
+        <item
+            android:id="@+id/menuItemAzul"
+            android:title="@string/azul" />
+        <item
+            android:id="@+id/menuItemVermelho"
+            android:title="@string/vermelho" />
+        <item
+            android:id="@+id/menuItemAmarelo"
+            android:title="@string/amarelo" />
+    </group>
 
 </menu>

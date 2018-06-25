@@ -62,4 +62,7 @@
     <string name="magno">Magno Carvalho dos santos</string>
     <string name="software">Software engineering</string>
     <string name="tiposs">type of Outlay</string>
+    <string name="azul">blue</string>
+    <string name="vermelho">red</string>
+    <string name="amarelo">yellow</string>
 </resources>

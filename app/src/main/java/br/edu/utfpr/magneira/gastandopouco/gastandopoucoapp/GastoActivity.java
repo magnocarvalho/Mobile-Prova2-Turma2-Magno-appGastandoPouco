@@ -159,7 +159,7 @@ public class GastoActivity extends AppCompatActivity {
 
             idGasto     = bundle.getInt(ID_CONTATO);
             idTipoGasto = bundle.getInt(ID_TIPO_CONTATO);
-
+            spinnerTipoGasto.setSelection(idTipoGasto);
             editTextValor.setText(String.valueOf(bundle.getDouble(VALOR)));
 
         }else{
